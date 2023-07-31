@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_picture = db.Column(db.Text, default=default_image)
-    active = db.Column(db.Boolean, default=True)
+    account_id = db.Column(db.Integer)
     theme = db.Column(db.String(255), default='light')
     createdAt = db.Column(db.DateTime, default=datetime.now())
     updatedAt = db.Column(db.DateTime, default=datetime.now())
@@ -28,10 +28,10 @@ class User(db.Model, UserMixin):
 
     @password.setter
     def password(self, password):
-        self.hashed_password = hashlib.sha256(password)
+        self.hashed_password = hashlib.sha1(password)
 
     def check_password(self, password):
-        hashed_password = hashlib.sha256(password)
+        hashed_password = hashlib.sha1(password)
         return self.password == hashed_password
 
     def to_dict(self):
@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_picture': self.profile_picture,
-            'active': self.active,
+            'account_id': self.account_id,
             'theme': self.theme,
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt
