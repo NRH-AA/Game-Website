@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
-from datetime import datetime
 
 class Account_Viplist(db.Model, UserMixin):
     __tablename__ = 'account_viplist'
