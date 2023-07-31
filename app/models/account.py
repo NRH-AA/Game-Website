@@ -16,7 +16,7 @@ class Account(db.Model, UserMixin):
     secret = db.Column(db.Integer, nullable=True)
     premium_ends_at = db.Column(db.Integer, default=0)
     email = db.Column(db.String(70), nullable=True)
-    creation = db.Column(db.Integer, default=datetime.now())
+    creation = db.Column(db.DateTime, default=datetime.now())
     
     
     @property
