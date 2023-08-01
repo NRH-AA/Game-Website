@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
 
-class Player_Inbox_Item(db.Model, UserMixin):
-    __tablename__ = 'player_inboxitems'
+class Player_Item(db.Model, UserMixin):
+    __tablename__ = 'player_items'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
