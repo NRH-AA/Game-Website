@@ -7,24 +7,19 @@ from app.utils import (
 
 user_routes = Blueprint('users', __name__)
 
+# Get specific user information
+# /api/users/user_id
 @user_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def user(id):
-    """
-    Route to get user by id. GET /api/users/userId
-    Route returns user dictionary data.
-    """
     user = User.query.get(id)
     return user.to_dict()
 
+# Change user theme
+# /api/users/user_id/theme
 @user_routes.route('/<int:id>/theme', methods=['POST'])
 @login_required
 def update_user_theme(id):
-    """
-    Route to update user theme in database. POST /api/users/userId/theme
-    Expects object: {theme: 'string'}
-    Route returns new user dictionary data.
-    """
     data = request.get_json()
     theme = data['theme']
     
@@ -36,14 +31,11 @@ def update_user_theme(id):
     
     return ret.to_dict()
 
+# Change user profile picture
+# /api/users/user_id/picture
 @user_routes.route('/<int:id>/picture', methods=['POST'])
 @login_required
 def update_user_picture(id):
-    """
-    Route to upload user profile picture. POST /api/users/userId/picture
-    Expects: {profile_picture: 'url'}
-    Route returns new user dictionary data.
-    """
     profile_picture = request.get_json()['profile_picture']
     
     if not profile_picture:
@@ -55,14 +47,11 @@ def update_user_picture(id):
     ret = User.query.get(id)
     return ret.to_dict()
 
+# Upload an image to S3 bucket (required for user profile pictures)
+# /api/users/upload
 @user_routes.route('/upload', methods=['POST'])
 @login_required
 def upload_image():
-    """
-    Route to upload an image to the S3 Bucket. POST /api/users/upload
-    User route is used for login required to upload a file.
-    Returns a dictionary: {url: 'S3BucketUrl'}
-    """
     if "image" in request.files:
         image = request.files["image"]
 
@@ -78,22 +67,3 @@ def upload_image():
 
     imageURL = upload["url"]
     return {"url": imageURL}
-
-@user_routes.route('/<int:id>/profile', methods=['DELETE'])
-@login_required
-def delete_profile(id):
-    '''
-    Route to delete a users profile. It will set user.active to false or true. 
-    It will not delete the user. 
-    You may use user.active to hide the profile and keep their data in the data base.
-    Route returns new user dictionary data.
-    '''
-    user = User.query.get(id)
-    
-    if not user:
-        return {'errors', ['Unable to find user']}, 400
-    
-    user.active = not user.active
-    db.session.commit()
-    ret = User.query.get(id)
-    return ret.to_dict()
