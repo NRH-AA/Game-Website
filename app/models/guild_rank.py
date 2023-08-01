@@ -9,8 +9,8 @@ class Guild_Rank(db.Model, UserMixin):
         
     id = db.Column(db.Integer, primary_key=True)
     guild_id = db.Column(db.Integer, nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    level = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    level = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):
         return {

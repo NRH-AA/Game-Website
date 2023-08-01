@@ -8,14 +8,14 @@ class Market_Offer(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
         
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, unsigned=True, primary_key=True)
     player_id = db.Column(db.Integer, nullable=False)
-    sale = db.Column(db.Integer, nullable=False)
-    itemtype = db.Column(db.Integer, nullable=False)
-    amount = db.Column(db.Integer, nullable=False)
-    created = db.Column(db.DateTime, default=datetime.now())
-    anonymous = db.Column(db.Integer, nullable=False)
-    price = db.Column(db.Integer, nullable=False)
+    sale = db.Column(db.SmallInteger, nullable=False, default=0)
+    itemtype = db.Column(db.SmallInteger, unsigned=True, nullable=False)
+    amount = db.Column(db.SmallInteger, unsigned=True, nullable=False)
+    created = db.Column(db.DateTime, unsigned=True, default=datetime.now())
+    anonymous = db.Column(db.SmallInteger, nullable=False, default=0)
+    price = db.Column(db.Integer, unsigned=True, nullable=False, default=0)
     
     def to_dict(self):
         return {

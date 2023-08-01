@@ -8,11 +8,11 @@ class Account_Ban(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
         
-    account_id = db.Column(db.Integer)
-    reason = db.Column(db.Text, nullable=True)
+    account_id = db.Column(db.Integer, nullable=False)
+    reason = db.Column(db.String(255), nullable=False)
     banned_at = db.Column(db.DateTime, default=datetime.now())
     expires_at = db.Column(db.DateTime, nullable=False)
-    banned_by = db.Column(db.String(50), nullable=False)
+    banned_by = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):
         return {

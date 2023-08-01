@@ -9,10 +9,10 @@ class Ip_Bans(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
         
     id = db.Column(db.Integer, primary_key=True)
-    reason = db.Column(db.String(255))
+    reason = db.Column(db.String(255), nullable=False)
     banned_at = db.Column(db.DateTime, default=datetime.now())
-    expires_at = db.Column(db.DateTime)
-    banned_by = db.Column(db.Integer)
+    expires_at = db.Column(db.DateTime, nullable=False)
+    banned_by = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):
         return {

@@ -10,10 +10,10 @@ class Account_Ban_History(db.Model, UserMixin):
         
     id = db.Column(db.Integer, primary_key=True)
     account_id = db.Column(db.Integer, nullable=False)
-    reason = db.Column(db.Text)
+    reason = db.Column(db.String(255), nullable=False)
     banned_at = db.Column(db.DateTime, default=datetime.now())
     expires_at = db.Column(db.DateTime, nullable=False)
-    banned_by = db.Column(db.String(50), nullable=False)
+    banned_by = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):
         return {

@@ -10,7 +10,7 @@ class Guild_Membership(db.Model, UserMixin):
     player_id = db.Column(db.Integer, primary_key=True)
     guild_id = db.Column(db.Integer, nullable=False)
     rank_id = db.Column(db.Integer, nullable=False)
-    nick = db.Column(db.Integer, default='New Member')
+    nick = db.Column(db.String(15), nullable=False)
     
     def to_dict(self):
         return {

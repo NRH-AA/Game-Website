@@ -9,17 +9,17 @@ class House(db.Model, UserMixin):
         
     id = db.Column(db.Integer, primary_key=True)
     owner = db.Column(db.Integer, nullable=False)
-    paid = db.Column(db.Integer)
-    warnings = db.Column(db.Integer)
-    name = db.Column(db.String(255))
-    rent = db.Column(db.Integer)
-    town_id = db.Column(db.Integer)
-    bid = db.Column(db.Integer)
-    bid_end = db.Column(db.Integer)
-    last_bid = db.Column(db.Integer)
-    highest_bidder = db.Column(db.Integer)
-    size = db.Column(db.Integer)
-    beds = db.Column(db.Integer)
+    paid = db.Column(db.Integer, unsigned=True, nullable=False, default=0)
+    warnings = db.Column(db.Integer, nullable=False, default=0)
+    name = db.Column(db.String(255), nullable=False)
+    rent = db.Column(db.Integer, nullable=False, default=0)
+    town_id = db.Column(db.Integer, nullable=False, default=0)
+    bid = db.Column(db.Integer, nullable=False, deafult=0)
+    bid_end = db.Column(db.Integer, nullable=False, deafult=0)
+    last_bid = db.Column(db.Integer, nullable=False, deafult=0)
+    highest_bidder = db.Column(db.Integer, nullable=False, deafult=0)
+    size = db.Column(db.Integer, nullable=False, deafult=0)
+    beds = db.Column(db.Integer, nullable=False, deafult=0)
     
     def to_dict(self):
         return {
