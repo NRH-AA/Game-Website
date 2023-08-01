@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
 
-class Player_Namelock(db.Model, UserMixin):
-    __tablename__ = 'player_namelocks'
+class Player_Spell(db.Model, UserMixin):
+    __tablename__ = 'player_spells'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
