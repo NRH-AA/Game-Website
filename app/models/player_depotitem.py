@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
-from datetime import datetime
 
 class Player_Depot_Item(db.Model, UserMixin):
     __tablename__ = 'player_depotitems'
