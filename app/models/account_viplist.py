@@ -7,11 +7,11 @@ class Account_Viplist(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
         
-    account_id = db.Column(db.Integer)
+    account_id = db.Column(db.Integer, nullable=False)
     player_id = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.Text)
-    icon = db.Column(db.Integer)
-    notify = db.Column(db.Integer)
+    description = db.Column(db.String(128), nullable=False)
+    icon = db.Column(db.SmallInteger, unsigned=True, nullable=False)
+    notify = db.Column(db.SmallInteger, nullable=False)
     
     def to_dict(self):
         return {

@@ -7,8 +7,8 @@ class Guild_Invite(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     
-    player_id = db.Column(db.Integer, nullable=False)
-    guild_id = db.Column(db.Integer, nullable=False)
+    player_id = db.Column(db.Integer, nullable=False, default=0)
+    guild_id = db.Column(db.Integer, nullable=False, default=0)
     
     def to_dict(self):
         return {

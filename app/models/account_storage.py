@@ -7,9 +7,9 @@ class Account_Storage(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
         
-    account_id = db.Column(db.Integer)
-    key = db.Column(db.Integer)
-    value = db.Column(db.Integer)
+    account_id = db.Column(db.Integer, nullable=False)
+    key = db.Column(db.Integer, unsigned=True, nullable=False)
+    value = db.Column(db.Integer, nullable=False)
     
     def to_dict(self):
         return {
