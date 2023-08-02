@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
+from sqlalchemy.dialects.mysql import INTEGER
 from datetime import datetime
 import hashlib
 
@@ -14,7 +15,7 @@ class Account(db.Model, UserMixin):
     name = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(40), nullable=False)
     secret = db.Column(db.String(16))
-    premium_ends_at = db.Column(db.Integer, unsigned=True, nullable=False, default=0)
+    premium_ends_at = db.Column(INTEGER(unsigned=True), nullable=False, default=0)
     email = db.Column(db.String(255), nullable=True)
     creation = db.Column(db.DateTime, default=datetime.now())
     

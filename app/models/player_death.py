@@ -10,7 +10,7 @@ class Player_Death(db.Model, UserMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer, nullable=False)
-    time = db.Column(db.DateTime, unsinged=True, nullable=False, default=datetime.now())
+    time = db.Column(db.DateTime, nullable=False, default=datetime.now())
     level = db.Column(db.Integer, nullable=False, default=1)
     killed_by = db.Column(db.String(255), nullable=False)
     is_player = db.Column(db.SmallInteger, nullable=False, default=1)

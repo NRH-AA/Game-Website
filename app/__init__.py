@@ -39,7 +39,7 @@ DB_NAME = environ.get('DB_NAME')
 app.config.update(
     SECRET_KEY = environ.get('SECRET_KEY'),
     SQLALCHEMY_TRACK_MODIFICATIONS = False,
-    SQLALCHEMY_DATABASE_URL = f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}',
+    SQLALCHEMY_DATABASE_URI = f'mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}',
     SQLALCHEMY_ECHO = True
 )
 
