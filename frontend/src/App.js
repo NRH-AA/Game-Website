@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
+import CreateAccountComponent from './components/users/CreateAccount';
 import AllPlayersComponent from './components/players';
 
 const ErrorPage = () => {
@@ -17,6 +18,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+      <Route path='/create'>
+          <CreateAccountComponent />
+        </Route>
+        
         <Route path='/players'>
           <AllPlayersComponent />
         </Route>
