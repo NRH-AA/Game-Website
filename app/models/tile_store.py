@@ -6,12 +6,14 @@ class Tile_Store(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     house_id = db.Column(db.Integer, nullable=False)
     data = db.Column(db.LargeBinary, nullable=False)
     
     def to_dict(self):
         return {
+            'id': self.id,
             'house_id': self.house_id,
             'data': self.data
         }

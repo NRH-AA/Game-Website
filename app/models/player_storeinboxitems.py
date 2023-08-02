@@ -6,7 +6,8 @@ class Player_Store_Inbox_Item(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer, nullable=False)
     sid = db.Column(db.Integer, nullable=False)
     pid = db.Column(db.Integer, nullable=False, default=0)
@@ -16,6 +17,7 @@ class Player_Store_Inbox_Item(db.Model, UserMixin):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'player_id': self.player_id,
             'sid': self.sid,
             'pid': self.pid,

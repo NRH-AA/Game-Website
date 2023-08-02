@@ -7,7 +7,8 @@ class Player_Death(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer, nullable=False)
     time = db.Column(db.DateTime, unsinged=True, nullable=False, default=datetime.now())
     level = db.Column(db.Integer, nullable=False, default=1)
@@ -20,6 +21,7 @@ class Player_Death(db.Model, UserMixin):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'player_id': self.player_id,
             'time': self.time,
             'level': self.level,

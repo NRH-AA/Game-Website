@@ -7,11 +7,13 @@ class Guild_Invite(db.Model, UserMixin):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
     
+    id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer, nullable=False, default=0)
     guild_id = db.Column(db.Integer, nullable=False, default=0)
     
     def to_dict(self):
         return {
+            'id': self.id,
             'player_id': self.player_id,
             'guild_id': self.guild_id
         }

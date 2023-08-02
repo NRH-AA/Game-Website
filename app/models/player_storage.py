@@ -6,13 +6,15 @@ class Player_Storage(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer, nullable=False, default=0)
     key = db.Column(db.Integer, unsigned=True, nullable=False, default=0)
     value = db.Column(db.Integer, nullable=False, default=0)
     
     def to_dict(self):
         return {
+            'id': self.id,
             'player_id': self.player_id,
             'key': self.key,
             'value': self.value

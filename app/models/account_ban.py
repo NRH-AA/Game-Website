@@ -7,7 +7,8 @@ class Account_Ban(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     account_id = db.Column(db.Integer, nullable=False)
     reason = db.Column(db.String(255), nullable=False)
     banned_at = db.Column(db.DateTime, default=datetime.now())
@@ -16,6 +17,7 @@ class Account_Ban(db.Model, UserMixin):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'account_id': self.account_id,
             'reason': self.reason,
             'banned_at': self.banned_at,
