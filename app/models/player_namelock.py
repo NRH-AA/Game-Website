@@ -7,7 +7,8 @@ class Player_Namelock(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer, primary_key=True)
     reason = db.Column(db.String(255), nullable=False)
     namelocked_at = db.Column(db.DateTime, default=datetime.now())
@@ -15,6 +16,7 @@ class Player_Namelock(db.Model, UserMixin):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'player_id': self.player_id,
             'reason': self.reason,
             'namelocked_at': self.namelocked_at,

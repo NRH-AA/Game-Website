@@ -6,7 +6,8 @@ class Account_Viplist(db.Model, UserMixin):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-        
+    
+    id = db.Column(db.Integer, primary_key=True)
     account_id = db.Column(db.Integer, nullable=False)
     player_id = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(128), nullable=False)
@@ -15,6 +16,7 @@ class Account_Viplist(db.Model, UserMixin):
     
     def to_dict(self):
         return {
+            'id': self.id,
             'account_id': self.account_id,
             'player_id': self.player_id,
             'description': self.description,
