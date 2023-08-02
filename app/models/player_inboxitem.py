@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.dialects.mysql import SMALLINT
 from flask_login import UserMixin
 
 class Player_Inbox_Item(db.Model, UserMixin):
@@ -11,7 +12,7 @@ class Player_Inbox_Item(db.Model, UserMixin):
     player_id = db.Column(db.Integer, nullable=False)
     sid = db.Column(db.Integer, nullable=False)
     pid = db.Column(db.Integer, nullable=False, default=0)
-    itemtype = db.Column(db.SmallInteger, unsigned=True, nullable=False)
+    itemtype = db.Column(SMALLINT(unsigned=True), nullable=False)
     count = db.Column(db.SmallInteger, nullable=False, default=0)
     attributes = db.Column(db.LargeBinary, nullable=False)
     

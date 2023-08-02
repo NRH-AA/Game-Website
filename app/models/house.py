@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.dialects.mysql import INTEGER
 from flask_login import UserMixin
 
 class House(db.Model, UserMixin):
@@ -9,17 +10,17 @@ class House(db.Model, UserMixin):
         
     id = db.Column(db.Integer, primary_key=True)
     owner = db.Column(db.Integer, nullable=False)
-    paid = db.Column(db.Integer, unsigned=True, nullable=False, default=0)
+    paid = db.Column(INTEGER(unsigned=True), nullable=False, default=0)
     warnings = db.Column(db.Integer, nullable=False, default=0)
     name = db.Column(db.String(255), nullable=False)
     rent = db.Column(db.Integer, nullable=False, default=0)
     town_id = db.Column(db.Integer, nullable=False, default=0)
-    bid = db.Column(db.Integer, nullable=False, deafult=0)
-    bid_end = db.Column(db.Integer, nullable=False, deafult=0)
-    last_bid = db.Column(db.Integer, nullable=False, deafult=0)
-    highest_bidder = db.Column(db.Integer, nullable=False, deafult=0)
-    size = db.Column(db.Integer, nullable=False, deafult=0)
-    beds = db.Column(db.Integer, nullable=False, deafult=0)
+    bid = db.Column(db.Integer, nullable=False, default=0)
+    bid_end = db.Column(db.Integer, nullable=False, default=0)
+    last_bid = db.Column(db.Integer, nullable=False, default=0)
+    highest_bidder = db.Column(db.Integer, nullable=False, default=0)
+    size = db.Column(db.Integer, nullable=False, default=0)
+    beds = db.Column(db.Integer, nullable=False, default=0)
     
     def to_dict(self):
         return {
