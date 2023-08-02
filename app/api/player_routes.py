@@ -6,5 +6,5 @@ player_routes = Blueprint('player', __name__)
 
 @player_routes.route('/', methods=['GET'])
 def get_all_players():
-    players = Player.query.all()   
+    players = Player.query.all() 
     return [player.to_dict() for player in players]

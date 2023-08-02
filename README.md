@@ -25,7 +25,7 @@ Linux Required Downloads:<br>
 <br></br>
 Running the server (backend):<br>
 `pipenv install` <br>
-`pipenv install Flask python-dotenv wtforms Flask-WTF SQLAlchemy Flask-SQLAlchemy alembic Flask-Migrate` <br>
+`pipenv install Flask python-dotenv wtforms Flask-WTF SQLAlchemy Flask-SQLAlchemy alembic Flask-Migrate mysqlclient` <br>
 `pipenv run flask run`
 
 Running the server (frontend):<br>
