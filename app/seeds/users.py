@@ -15,17 +15,6 @@ def seed_users():
     )
     
     db.session.add(demo)
-    
-    for i in range(20):
-        newUser = User(
-            username=fake.user_name(),
-            email=fake.email(),
-            password='password',
-            profile_picture= default_profile_picture
-        )
-        
-        db.session.add(newUser)
-    
     db.session.commit()
 
 
