@@ -75,12 +75,6 @@ def sign_up():
     if check_user:
         errors['emailTaken'] = 'Email is already in use'
         return {'errors': errors}, 400
-
-    user = User(
-        username = username,
-        email = email,
-        password = password
-    )
     
     new_account = Account(
         name = account_name,
@@ -88,8 +82,16 @@ def sign_up():
         email = email
     )
     
-    db.session.add(user)
     db.session.add(new_account)
+    
+    user = User(
+        username = username,
+        email = email,
+        password = password,
+        account_id = new_account.id
+    )
+    
+    db.session.add(user)
     
     login_user(user)
     return user.to_dict()
