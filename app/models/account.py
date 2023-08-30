@@ -17,19 +17,19 @@ class Account(db.Model, UserMixin):
     secret = db.Column(db.String(16))
     premium_ends_at = db.Column(INTEGER(unsigned=True), nullable=False, default=0)
     email = db.Column(db.String(255), nullable=True)
-    creation = db.Column(db.DateTime, default=datetime.now())
+    creation = db.Column(db.DateTime, default=0)
     
     
     @property
-    def password(self):
+    def hashed_password(self):
         return self.password
 
-    @password.setter
-    def password(self, password):
-        self.password = hashlib.sha1(password)
+    @hashed_password.setter
+    def hashed_password(self, password):
+        self.password = hashlib.sha1(password.encode('utf-8')).hexdigest()
 
     def check_password(self, password):
-        hashed_password = hashlib.sha1(password)
+        hashed_password = hashlib.sha1(password.encode('utf-8')).hexdigest()
         return self.password == hashed_password
 
     def to_dict(self):

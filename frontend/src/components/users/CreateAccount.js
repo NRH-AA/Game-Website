@@ -11,6 +11,8 @@ const CreateAccountComponent = () => {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     
+    const [accounts, setAccounts] = useState(false);
+    
     const validateData = useCallback(() => {
         const newErrors = {};
         
@@ -24,19 +26,35 @@ const CreateAccountComponent = () => {
         setErrors(newErrors);
     }, [username, email, accountName, password, password2])
     
+    const getAllAccounts = async () => {
+        const res = await fetch('/api/account/');
+        
+        if (res.ok) {
+            const data = await res.json();
+            return setAccounts(data.accounts);
+        }
+        
+        return setAccounts([]);
+    };
+    
+    
     useEffect(() => {
         if (submitted) validateData();
-    }, [validateData, submitted, username, email, accountName, password, password2])
+    }, [validateData, submitted, username, email, accountName, password, password2]);
+    
+    useEffect(() => {
+        if (!accounts) getAllAccounts();
+    }, [accounts]);
     
     
     const createAccount = async () => {
-        const res = await fetch('/api/auth/signup', {
+        const res = await fetch('/api/account', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                account_name: accountName,
+                name: accountName,
                 email,
                 username,
                 password,
@@ -44,13 +62,12 @@ const CreateAccountComponent = () => {
             })
         });
         
-        const data = await res.json();
         
         if (res.ok) {
-            return setErrors({username: 'Account Created!'})
-        }
-        
-        return setErrors(data.errors);
+            const data = await res.json();
+            if (data.error) setErrors({username: data.error});
+            if (data.success) setErrors({username: data.success});
+        };
     };
     
     const handleSubmit = (e) => {
@@ -75,6 +92,16 @@ const CreateAccountComponent = () => {
                 gap: '10px'
             }}
         >
+            
+            <div>
+                {accounts?.length ? accounts.map((el, i) =>
+                    <p key={i}>{el.name} {el.creation} {el.email}</p>
+                )
+                : null
+                }
+            </div>
+            
+            
             {errors?.username && <p>{errors.username}</p>}
             <input type='text' placeholder='Username'
                 value={username}

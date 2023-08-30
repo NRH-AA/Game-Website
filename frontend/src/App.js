@@ -18,7 +18,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-      <Route path='/create'>
+        <Route path='/create'>
           <CreateAccountComponent />
         </Route>
         
