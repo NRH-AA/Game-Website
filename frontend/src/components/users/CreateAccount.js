@@ -78,7 +78,6 @@ const CreateAccountComponent = () => {
         
         if (Object.keys(errors).length > 0) return;
         
-        console.log('Creating Account');
         return createAccount();
     }
     
