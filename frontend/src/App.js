@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import { authenticate } from './store/session';
+
 import './App.css';
 
 import CreateAccountComponent from './components/users/CreateAccount';
@@ -10,9 +12,9 @@ import HomeComponent from './components/home';
 
 const ErrorPage = () => {
   return (
-    <React.Fragment>
+    <>
       <h2>Failed to load resource.</h2>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -23,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     if (!loaded) dispatch(authenticate()).then(() => setLoaded(true));
-  }, [loaded, sessionUser])
+  }, [loaded, sessionUser]);
 
   return (
     <BrowserRouter>
