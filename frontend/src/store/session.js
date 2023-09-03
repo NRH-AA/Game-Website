@@ -4,6 +4,10 @@ const REMOVE_USER = "session/REMOVE_USER";
 const CHANGE_THEME = "session/CHANGE_THEME";
 
 // Actions
+const setUser = (data) => ({
+	type: SET_USER,
+	data
+});
 const removeUser = () => ({
 	type: REMOVE_USER,
 });
@@ -107,7 +111,7 @@ export default function reducer(state = initialState, action) {
 	let newState = {...state}
 	switch (action.type) {
 		case SET_USER:
-			newState.user = action.payload;
+			newState.user = action.data;
 			return newState;
 		case REMOVE_USER:
 			newState.user = null;
